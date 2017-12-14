@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">SimpleAndroidCalculator</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="hello_world">Ciao Mondo!</string>
+    <string name="hello">Android Simple Calculator</string>
+    <string name="hint1">1° valore..</string>
+    <string name="hint2">2° valore..</string>
+    <string name="resultLabel">Risultato: </string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">x</string>
+    <string name="divide">/</string>
+    <string name="instructions">Istruzioni</string>
+
+    <string name="exception_empty">Campo vuoto</string>
+    <string name="exception_dividebyzero">Impossibile dividere per 0</string>
+
+    <string name="n_0">0</string>
+    <string name="n_1">1</string>
+    <string name="n_2">2</string>
+    <string name="n_3">3</string>
+    <string name="n_4">4</string>
+    <string name="n_5">5</string>
+    <string name="n_6">6</string>
+    <string name="n_7">7</string>
+    <string name="n_8">8</string>
+    <string name="n_9">9</string>
+    <string name="btnResult">=</string>
+    <string name="btnDot">.</string>
+    <string name="btnDelete"><![CDATA[<—]]></string>
+    <string name="plusminus">±</string>
+
+    <string name="instructions_lorem">Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Ut euismod, nibh sed commodo varius
+, ligula odio pulvinar nisl, sit amet bibendum magna tellus in
+magna. Nunc a massa tellus. Fusce dignissim mollis neque eget
+vulputate. Lorem ipsum dolor sit amet.</string>
+    <string name="back">Indietro</string>
+    <string name="hintOp">op</string>
+    <string name="err_missing_op">Errore: operatore mancante</string>
+    <string name="err_missing_val">Errore: valori mancanti</string>
+    <string name="err_divide_by_zero">Errore: divisione per 0</string>
+
+</resources>

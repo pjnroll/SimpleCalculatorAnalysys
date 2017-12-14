@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorNumbers">#00AA00</color>
+    <color name="colorOp">#AA0000</color>
+
+    <color name="bgStrongColor">#4B4E4A</color> <!-- this is for the color of the border and the numbers' background -->
+
+    <color name="btnBgBorder">@color/bgStrongColor</color>
+
+    <color name="btnBgNumberNormal">#558B2F</color>
+    <color name="btnBgNumberPressed">#8BC34A</color>
+
+    <color name="btnBgOpsNormal">#546E7A</color>
+    <color name="btnBgOpsPressed">#90A4AE</color>
+
+    <color name="layoutBgNumbers">@color/bgStrongColor</color>
+    <color name="layoutBgTextViews">#E0E0E0</color>
+</resources>
