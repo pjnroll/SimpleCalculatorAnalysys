@@ -40,4 +40,6 @@ vulputate. Lorem ipsum dolor sit amet.</string>
     <string name="err_missing_op">Error: missing operator</string>
     <string name="err_missing_val">Error: missing values</string>
     <string name="err_divide_by_zero">Error: can\'t divide by 0</string>
+    <string name="copy">Copy</string>
+    <string name="paste">Paste</string>
 </resources>

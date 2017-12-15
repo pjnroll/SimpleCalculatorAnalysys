@@ -2,8 +2,11 @@ package org.farfallettalaviano.simplecalculator.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import static java.lang.Math.E;
 
 /**
  * Created by Pj94 on 07/12/2017.
@@ -24,16 +27,16 @@ public class Utils {
         return (T) toRet;
     }
 
-    /**
-     * Util method that allows to hide the keyboard after the user presses a Button
-     * @param v the current View
-     */
-    public static void hideKeyboard(Context ctx, View v) {
-        if (v != null) {
-            InputMethodManager imm;
-            imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
-            assert imm != null;
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    public static void letsGoOverflow() {
+        Log.e("STARTED", "GO");
+        double saveMe = 0.0d;
+        try {
+            for (double i = E+9999999; ; i=i+10000) {
+                saveMe = i;
+                Log.e("NUMBER", String.valueOf(saveMe));
+            }
+        } catch (NumberFormatException e) {
+            Log.e("OVERFLOOOW?", String.valueOf(saveMe));
         }
     }
 }

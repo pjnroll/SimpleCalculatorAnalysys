@@ -16,6 +16,9 @@ import static org.junit.Assert.*;
 public class MainActivityTest {
 
     @Rule
+    /**
+     * Create an instance of the Activity under test
+     */
     public ActivityTestRule<MainActivity> mActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     private MainActivity mActivity = null;
@@ -40,6 +43,7 @@ public class MainActivityTest {
 
     @After
     public void tearDown() throws Exception {
+        mActivity = null;
     }
 
 }

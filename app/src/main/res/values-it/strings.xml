@@ -40,5 +40,7 @@ vulputate. Lorem ipsum dolor sit amet.</string>
     <string name="err_missing_op">Errore: operatore mancante</string>
     <string name="err_missing_val">Errore: valori mancanti</string>
     <string name="err_divide_by_zero">Errore: divisione per 0</string>
+    <string name="copy">Copia</string>
+    <string name="paste">Incolla</string>
 
 </resources>

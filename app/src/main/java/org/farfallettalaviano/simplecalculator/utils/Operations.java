@@ -40,4 +40,8 @@ public class Operations {
 
         return bd.doubleValue();
     }
+
+    public static double elevation(double a, double b) {
+        return Math.pow(a, b);
+    }
 }

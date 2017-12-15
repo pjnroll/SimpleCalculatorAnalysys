@@ -3,9 +3,11 @@ package org.farfallettalaviano.simplecalculator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import org.farfallettalaviano.simplecalculator.utils.Operations;
@@ -25,6 +27,8 @@ public class MainActivity extends Activity {
     private double mVal1;
     private double mVal2;
 
+    private String copied;
+
     /**
      * Called when the activity is first created.
      */
@@ -33,6 +37,23 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        copied = null;
+
+        handleTextViews();
+
+        handleNumbersButtons();
+
+        handleDeleteButton();
+
+        handleOperationsButton();
+
+        handleResultButton();
+    }
+
+    /**
+     * It handles the TextViews' behaviour
+     */
+    public void handleTextViews() {
         /* TextViews ***********************************************************************/
         mTxtVal1 = Utils.findViewById(this, R.id.txtVal1);
         mTxtOp = Utils.findViewById(this, R.id.txtOp);
@@ -44,7 +65,10 @@ public class MainActivity extends Activity {
          */
         mTxtFocused = mTxtVal1;
 
-        OnClickListener txtListener = new OnClickListener() {
+        /*
+         * Choose which TextView should have the focus
+         */
+        OnClickListener txtFocusListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (v instanceof TextView) {
@@ -52,10 +76,64 @@ public class MainActivity extends Activity {
                 }
             }
         };
-        mTxtVal1.setOnClickListener(txtListener);
-        mTxtOp.setOnClickListener(txtListener);
-        mTxtVal2.setOnClickListener(txtListener);
 
+        View.OnLongClickListener txtCopyPasteListener = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (v instanceof TextView)
+                    mTxtFocused = (TextView) v;
+
+                PopupMenu popupMenu = new PopupMenu(getBaseContext(), v);
+                popupMenu.getMenuInflater().inflate(R.menu.copy_paste, popupMenu.getMenu());
+                if (mTxtFocused == mTxtResult) {
+                    popupMenu.getMenu().getItem(1).setEnabled(false);
+                }
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getTitle().toString()) {
+                            case ("Copy"):
+                                copy();
+                                break;
+                            case ("Copia"):
+                                copy();
+                                break;
+
+                            case ("Paste"):
+                                paste();
+                                break;
+                            case ("Incolla"):
+                                paste();
+                                break;
+
+                            default:
+                                break;
+                        }
+                        return true;
+                    }
+                });
+
+                popupMenu.show();
+
+                return true;
+            }
+        };
+
+        mTxtVal1.setOnClickListener(txtFocusListener);
+        mTxtOp.setOnClickListener(txtFocusListener);
+        mTxtVal2.setOnClickListener(txtFocusListener);
+        mTxtResult.setOnClickListener(txtFocusListener);
+
+        mTxtVal1.setOnLongClickListener(txtCopyPasteListener);
+        mTxtVal2.setOnLongClickListener(txtCopyPasteListener);
+        mTxtResult.setOnLongClickListener(txtCopyPasteListener);
+    }
+
+    /**
+     * Here it handles the numbers' Buttons
+     */
+    public void handleNumbersButtons() {
         /* Numbers' Buttons ****************************************************************/
         Button mBtn0 = Utils.findViewById(this, R.id.btn0);
         Button mBtn1 = Utils.findViewById(this, R.id.btn1);
@@ -73,59 +151,59 @@ public class MainActivity extends Activity {
         OnClickListener btnNumberListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTxtFocused != null && mTxtFocused.getId() != R.id.txtOp) {
+                if (mTxtFocused != null && (mTxtFocused != mTxtOp && mTxtFocused != mTxtResult)) {
+                    String before = mTxtFocused.getText().toString();
                     switch (v.getId()) {
                         case (R.id.btn0):
-                            mTxtFocused.setText(String.format("%s0", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s0", before));
                             break;
 
                         case (R.id.btn1):
-                            mTxtFocused.setText(String.format("%s1", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s1", before));
                             break;
 
                         case (R.id.btn2):
-                            mTxtFocused.setText(String.format("%s2", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s2", before));
                             break;
 
                         case (R.id.btn3):
-                            mTxtFocused.setText(String.format("%s3", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s3", before));
                             break;
 
                         case (R.id.btn4):
-                            mTxtFocused.setText(String.format("%s4", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s4", before));
                             break;
 
                         case (R.id.btn5):
-                            mTxtFocused.setText(String.format("%s5", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s5", before));
                             break;
 
                         case (R.id.btn6):
-                            mTxtFocused.setText(String.format("%s6", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s6", before));
                             break;
 
                         case (R.id.btn7):
-                            mTxtFocused.setText(String.format("%s7", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s7", before));
                             break;
 
                         case (R.id.btn8):
-                            mTxtFocused.setText(String.format("%s8", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s8", before));
                             break;
 
                         case (R.id.btn9):
-                            mTxtFocused.setText(String.format("%s9", mTxtFocused.getText()));
+                            mTxtFocused.setText(String.format("%s9", before));
                             break;
 
                         case (R.id.btnPlusMinus):
-                            if (!mTxtFocused.getText().equals("")) {
-                                String s = mTxtFocused.getText().toString();
-                                double val = Double.parseDouble(s);
+                            if (!before.equals("")) {
+                                double val = Double.parseDouble(before);
                                 mTxtFocused.setText(String.valueOf(-val));
                             }
                             break;
 
                         case (R.id.btnDot):
-                            if (!mTxtFocused.getText().toString().contains("."))
-                                mTxtFocused.setText(String.format("%s.", mTxtFocused.getText()));
+                            if (!before.contains("."))
+                                mTxtFocused.setText(String.format("%s.", before));
                             break;
 
                         default:
@@ -147,23 +225,37 @@ public class MainActivity extends Activity {
         mBtn9.setOnClickListener(btnNumberListener);
         mBtnPlusMinus.setOnClickListener(btnNumberListener);
         mBtnDot.setOnClickListener(btnNumberListener);
+    }
 
+    /**
+     * Handle the delete Button
+     */
+    public void handleDeleteButton() {
         /* Delete Button *******************************************************************/
         Button btnDelete = Utils.findViewById(this, R.id.btnDelete);
         btnDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mTxtFocused != null) {
-                    int len = mTxtFocused.getText().length();
-                    if (len > 0) {
-                        String text = mTxtFocused.getText().toString();
-                        text = text.substring(0, len-1);
-                        mTxtFocused.setText(text);
+                    if (mTxtFocused == mTxtResult) {
+                        mTxtFocused.setText("");
+                    } else {
+                        int len = mTxtFocused.getText().length();
+                        if (len > 0) {
+                            String text = mTxtFocused.getText().toString();
+                            text = text.substring(0, len-1);
+                            mTxtFocused.setText(text);
+                        }
                     }
                 }
             }
         });
+    }
 
+    /**
+     * Here it handles the operations Button
+     */
+    public void handleOperationsButton() {
         /* Operations' Buttons *************************************************************/
         Button mBtnAdd = Utils.findViewById(this, R.id.btnAdd);
         Button mBtnSubtract = Utils.findViewById(this, R.id.btnSubtract);
@@ -201,7 +293,12 @@ public class MainActivity extends Activity {
         mBtnSubtract.setOnClickListener(btnOpsListener);
         mBtnMultiply.setOnClickListener(btnOpsListener);
         mBtnDivide.setOnClickListener(btnOpsListener);
+    }
 
+    /**
+     * Here it specifies the result button and the associated listener
+     */
+    public void handleResultButton() {
         /* Result Button *******************************************************************/
         Button mBtnResult = Utils.findViewById(this, R.id.btnResult);
 
@@ -235,9 +332,9 @@ public class MainActivity extends Activity {
                         break;
                 }
 
-                if (result == Double.NEGATIVE_INFINITY || result == Double.POSITIVE_INFINITY) {
+                if (Double.compare(result, Double.NEGATIVE_INFINITY) == 0 || Double.compare(result, Double.POSITIVE_INFINITY) == 0) {
                     String s;
-                    if (result == Double.NEGATIVE_INFINITY) {
+                    if (Double.compare(result, Double.NEGATIVE_INFINITY) == 0) {
                         s = getString(R.string.err_missing_val);
                     } else {
                         s = getString(R.string.err_divide_by_zero);
@@ -247,6 +344,24 @@ public class MainActivity extends Activity {
                     mTxtResult.setText(String.valueOf(result));
             }
         });
+    }
+
+    /**
+     * Method that copy the content of the focused TextView
+     */
+    public void copy() {
+        if (mTxtFocused != null && mTxtFocused.getText().length() > 0)
+            copied = mTxtFocused.getText().toString();
+    }
+
+    /**
+     * Method that past, in the focused TextView, the copied value
+     */
+    public void paste() {
+        if (copied != null && mTxtFocused != mTxtResult) {
+            mTxtFocused.setText("");
+            mTxtFocused.setText(copied);
+        }
     }
 
     /**

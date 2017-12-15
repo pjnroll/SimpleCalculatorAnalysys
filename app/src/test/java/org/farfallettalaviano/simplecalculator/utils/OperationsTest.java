@@ -39,6 +39,11 @@ public class OperationsTest {
     public void divTest(){
         assertEquals(5.0d, Operations.divide(10d, 2d), delta);
         assertEquals(18.27777778d, Operations.divide(658.0d, 36.0d), delta);
-        assertEquals(17.151086d, Operations.divide(625.26d, 36.456d), delta);
+        assertEquals(17.15108624d, Operations.divide(625.26d, 36.456d), delta);
+    }
+
+    @Test
+    public void esageratoTest() {
+        assertEquals(Double.POSITIVE_INFINITY, Operations.elevation(999999, 999999), delta);
     }
 }
